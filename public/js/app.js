@@ -2178,6 +2178,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2191,6 +2203,18 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       _this.posts = response.data.data;
     });
+  },
+  methods: {
+    PostDelete: function PostDelete(id) {
+      var _this2 = this;
+
+      var uri = "http://localhost:8000/api/posts/".concat(id);
+      this.axios["delete"](uri).then(function (response) {
+        _this2.posts.splice(_this2.posts.indexOf(id), 1);
+      })["catch"](function (error) {
+        alert("system error!");
+      });
+    }
   }
 });
 
@@ -20227,7 +20251,11 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_vm._v("HAPUS")]
+                                [
+                                  _vm._v(
+                                    "\n                                            HAPUS\n                                        "
+                                  )
+                                ]
                               )
                             ],
                             1
