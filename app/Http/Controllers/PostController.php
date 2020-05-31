@@ -57,7 +57,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::find($id)->first();
+        $post = Post::whereId($id)->first();
 
         if ($post) {
             return response()->json([
@@ -73,7 +73,7 @@ class PostController extends Controller
             ], 404); {
         }
     }
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
         $validator = Validator::make(
             $request->all(),
@@ -94,7 +94,10 @@ class PostController extends Controller
                 'data' => $validator->errors()
             ], 400);
         } else {
-            $post = Post::whereId($request->input('id'))->update($request->all());
+            $post = Post::whereId($id)->update([
+                'title'     => $request->input('title'),
+                'content'   => $request->input('content'),
+            ]);
 
             if ($post) {
                 return response()->json([
